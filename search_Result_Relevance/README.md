@@ -2,14 +2,13 @@
 Predict Search Results Relevance
 ===================================
 
-This is an entry to [Kaggle](http://www.kaggle.com/)'s
-[Search Results Relevance](https://www.kaggle.com/c/crowdflower-search-relevance ompetition.
+This is an entry to [Kaggle](http://www.kaggle.com/)'s [Search Results Relevance](https://www.kaggle.com/c/crowdflower-search-relevance) competition.
 
 
 Problem description
 -----------------
 
-Quoting from Kaggle's [description page](https://www.kaggle.com/c/crowdflower-search-relevance):
+*Quoting from Kaggle's [description page]*(https://www.kaggle.com/c/crowdflower-search-relevance):
 
 Given the queries and resulting product descriptions from leading eCommerce sites, this competition asks to evaluate the accuracy of their search algorithms.
 
@@ -20,12 +19,10 @@ The goal of this competition is to create an open-source model that can be used 
 
 Plan of Attack
 ------------
-
-
-
-
-
-
+[**1. Data Overview**](https://github.com/rerock/Kaggle/tree/master/search_Result_Relevance#data-overview)  
+[**2. Data Analysis**](https://github.com/rerock/Kaggle/tree/master/search_Result_Relevance#data-analysis-)  
+[**3. Modeling & Result**](https://github.com/rerock/Kaggle/tree/master/search_Result_Relevance#modeling)  
+[**4. Things that didnt work**](https://github.com/rerock/Kaggle/tree/master/search_Result_Relevance#things-that-didnt-work--)  
 
 Data Overview
 -------------
@@ -177,7 +174,6 @@ asdf = function(A,B){
 tuneParam =tune.control(cross = 3, error.fun = asdf)
 set.seed(1)
 tune.out = tune(svm,relevance~.,data=cvt,kernel = "radial", ranges = list(cost=c(0.5,1,5)), tunecontrol = tuneParam)
-```
 # ------------------------------------------------------------------------------------
 # CART model
 library(caret)
@@ -200,7 +196,7 @@ Forest = randomForest(train_relevance ~ ., data=new_train, ntree=1000, mtry=37)
 PredictForest = predict(Forest, newdata = new_test)
 Newsubmission = data.frame(id=test$id, prediction = PredictForest)
 write.csv(Newsubmission,"Search_Result_CV.csv", row.names=FALSE)
-#----------------library(glmnet)
+# glmnet
 fit = glmnet(new_train,train_relevance)
 pred = predict(fit, sparse_test)
 cv = cv.glmnet(sparse_train,relevance,nfolds = 3)
